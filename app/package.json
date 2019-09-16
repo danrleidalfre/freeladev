@@ -8,12 +8,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "firebase": "^6.6.1",
     "jetifier": "^1.6.4",
     "node-pre-gyp": "^0.13.0",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",
-    "react-navigation": "^4.0.3"
+    "react-navigation": "^4.0.3",
+    "react-navigation-stack": "^1.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
