@@ -1,10 +1,18 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import LoginScreen from './src/pages/LoginScreen';
+import Login from './src/pages/Login';
+import CreateAccount from './src/pages/CreateAccount';
+import Projects from './src/pages/Projects';
 
 const AppNavigator = createStackNavigator({
     'Login': {
-      screen: LoginScreen,
+      screen: Login,
+    },
+    'CreateAccount': {
+      screen: CreateAccount,
+    },
+    'Projects': {
+      screen: Projects,
     },
   }, 
   {
@@ -14,11 +22,15 @@ const AppNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: '#00B5FF',             
       },
+      headerLeft: null,
       headerTitleStyle: {
         color: '#fff',
         fontSize: 40,
-        fontWeight: 'bold',          
-      }
+        fontWeight: 'bold',
+        flexGrow: 1,
+        textAlign: 'center',
+        paddingVertical: 20,      
+      },
     },
     cardStyle: {
       backgroundColor: '#00B5FF'

@@ -5,7 +5,9 @@ import {
     StyleSheet,
     Button,
     ActivityIndicator,
-    Text
+    Text,
+    Alert,
+    TouchableOpacity
 } from 'react-native';
 import FormRow from '../components/FormRow';
 import firebase from 'firebase';
@@ -52,6 +54,11 @@ export default class LoginScreen extends React.Component {
                 this.setState({message:"Logado com sucesso"});
             })
             .catch(error => {
+                if(error.code == "auth/user-not-found")
+                    Alert.alert(
+                        "Usuário não encontrado",
+                        "Deseja criar uma nova conta?"
+                    );
                 this.setState({message: this.getMessageByError(error.code)});
             })
             .then( () => {
@@ -89,12 +96,12 @@ export default class LoginScreen extends React.Component {
             case "auth/wrong-password":
                 return "Senha incorreta!";
             default:
-                return "Preencha os campos  corretamente!";
+                return "Preencha os campos corretamente!";
         }
     }
 
     render() {
-        return(
+        return(            
             <View>
                 <FormRow>
                     <TextInput
@@ -110,8 +117,17 @@ export default class LoginScreen extends React.Component {
                         value={this.state.password}
                         onChangeText={valor => {this.onChangeHandler('password', valor)}}
                     />
-                    {this.renderButton()}
-                    {this.renderMessage()}
+                    {/* {this.renderButton()}
+                    {this.renderMessage()} */}
+                    <TouchableOpacity>
+                        <Text style={styles.btnLogin}>ENTRAR</Text>                        
+                    </TouchableOpacity>
+                    <Text style={styles.textCreateAccount}>não possui cadastro?</Text>
+                    <TouchableOpacity                        
+                        onPress={() => this.props.navigation.navigate('CreateAccount')}
+                    >
+                        <Text style={styles.btnCreateAccount}>cadastre-se aqui.</Text>                        
+                    </TouchableOpacity>
                 </FormRow>
             </View>
         );
@@ -130,5 +146,27 @@ const styles = StyleSheet.create({
     },
     textMessage: {
         color: '#fff',
+    },
+    btnLogin: {
+        textAlign: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 45,
+        color: '#00B5FF',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        marginBottom: 20,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    textCreateAccount: {
+        textAlign: 'center',
+        color: '#fff',
+        fontSize: 18,
+    },
+    btnCreateAccount: {
+        textAlign: 'center',
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });
