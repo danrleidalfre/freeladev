@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     btnCreateAccount: {
         textAlign: 'center',
         color: '#fff',
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold'
     }
 });

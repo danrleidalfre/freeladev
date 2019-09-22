@@ -2,7 +2,13 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Login from './src/pages/Login';
 import CreateAccount from './src/pages/CreateAccount';
+import CreateProject from './src/pages/CreateProject';
+import FreelancerDetails from './src/pages/FreelancerDetails';
+import ProfileFreelancer from './src/pages/ProfileFreelancer';
+import ProjectDetails from './src/pages/ProjectDetails';
 import Projects from './src/pages/Projects';
+import HomeClient from './src/pages/HomeClient';
+
 
 const AppNavigator = createStackNavigator({
     'Login': {
@@ -11,8 +17,23 @@ const AppNavigator = createStackNavigator({
     'CreateAccount': {
       screen: CreateAccount,
     },
+    'CreateProject': {
+      screen: CreateProject,
+    },
+    'FreelancerDetails': {
+      screen: FreelancerDetails,
+    },
+    'ProfileFreelancer': {
+      screen: ProfileFreelancer,
+    },
+    'ProjectDetails': {
+      screen: ProjectDetails,
+    },
     'Projects': {
       screen: Projects,
+    },
+    'HomeClient': {
+      screen: HomeClient,
     },
   }, 
   {

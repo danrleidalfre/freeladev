@@ -12,10 +12,11 @@ const NavigationFooter = (props) => {
 
 const styles = StyleSheet.create({
     container: {        
-        backgroundColor: '#fff',
+        backgroundColor: '#00B5FF',        
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
+        paddingVertical: 5,
     }
 });
 

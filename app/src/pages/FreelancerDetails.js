@@ -3,7 +3,7 @@ import {View, ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 
-export default class Projects extends React.Component {
+export default class ProjectDetails extends React.Component {
   render() {
     return(      
       <View style={styles.container}>
@@ -11,13 +11,13 @@ export default class Projects extends React.Component {
           
         </ScrollView>      
         <NavigationFooter>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Projects')}>
-            <Icon style={styles.iconNavigationFooter} name="md-copy" />
-            <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProject')}>
+            <Icon style={styles.iconNavigationFooter} name="md-add-circle" />
+            <Text style={styles.btnNavigationFooter}>criar projeto</Text>                        
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileFreelancer')}>
-            <Icon style={styles.iconNavigationFooter} name="md-contact" />
-            <Text style={styles.btnNavigationFooter}>meu perfil</Text>                        
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
+            <Icon style={styles.iconNavigationFooter} name="md-people" />
+            <Text style={styles.btnNavigationFooter}>freelancers</Text>                        
           </TouchableOpacity>
         </NavigationFooter>
       </View>

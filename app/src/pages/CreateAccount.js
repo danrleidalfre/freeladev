@@ -7,12 +7,10 @@ export default class CreateAccount extends React.Component {
     return(
       <View>        
         <FormRow>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Projects')}
-          >
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Projects')}>
             <Text style={styles.btnAccount}>sou freelancer</Text>                        
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
             <Text style={styles.btnAccount}>sou cliente</Text>                        
           </TouchableOpacity>
           <TextInput
@@ -24,7 +22,7 @@ export default class CreateAccount extends React.Component {
             placeholder="senha"
           />
           <TouchableOpacity>
-            <Text style={styles.btnLogin}>LOGIN</Text>                        
+            <Text style={styles.btnLogin}>CADASTRAR</Text>                        
           </TouchableOpacity>
       </FormRow>
       </View>

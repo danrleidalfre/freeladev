@@ -3,7 +3,7 @@ import {View, ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 
-export default class Projects extends React.Component {
+export default class ProfileFreelancer extends React.Component {
   render() {
     return(      
       <View style={styles.container}>
