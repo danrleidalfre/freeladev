@@ -29,6 +29,10 @@ export default class ProjectDetails extends React.Component {
             <Icon style={styles.iconNavigationFooter} name="md-contact" />
             <Text style={styles.btnNavigationFooter}>meu perfil</Text>                        
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+            <Icon style={styles.iconNavigationFooter} name="exit" />
+            <Text style={styles.btnNavigationFooter}>sair</Text>                        
+          </TouchableOpacity>
         </NavigationFooter>
       </View>
     );

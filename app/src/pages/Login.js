@@ -3,7 +3,6 @@ import {
     View,
     TextInput,
     StyleSheet,
-    Button,
     ActivityIndicator,
     Text,
     Alert,
@@ -57,7 +56,14 @@ export default class LoginScreen extends React.Component {
                 if(error.code == "auth/user-not-found")
                     Alert.alert(
                         "Usuário não encontrado",
-                        "Deseja criar uma nova conta?"
+                        "Deseja criar uma nova conta?",
+                        [{
+                            text: 'Não',
+                            onPress: () => {this.props.navigation.navigate('login')}
+                        },{
+                            text: 'Sim',
+                            onPress: () => {this.props.navigation.navigate('CreateAccount')}
+                        }]
                     );
                 this.setState({message: this.getMessageByError(error.code)});
             })
@@ -70,11 +76,9 @@ export default class LoginScreen extends React.Component {
         if(this.state.isLoading)
             return <ActivityIndicator />;
         return(
-            <Button
-                title='entrar'
-                color='#00B5FF'
-                onPress={() => this.Login()}
-            />
+            <TouchableOpacity onPress={() => this.Login()}>
+                <Text style={styles.btnLogin}>ENTRAR</Text>                        
+            </TouchableOpacity>
         );
     }
 
@@ -117,11 +121,11 @@ export default class LoginScreen extends React.Component {
                         value={this.state.password}
                         onChangeText={valor => {this.onChangeHandler('password', valor)}}
                     />
-                    {/* {this.renderButton()}
-                    {this.renderMessage()} */}
-                    <TouchableOpacity>
+                    {this.renderButton()}
+                    {this.renderMessage()}
+                    {/* <TouchableOpacity>
                         <Text style={styles.btnLogin}>ENTRAR</Text>                        
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <Text style={styles.textCreateAccount}>não possui cadastro?</Text>
                     <TouchableOpacity                        
                         onPress={() => this.props.navigation.navigate('CreateAccount')}

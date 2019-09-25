@@ -13,19 +13,19 @@ import Freelancers from './src/pages/Freelancers';
 const AppNavigator = createStackNavigator({
     'Login': {
       screen: Login,
+    },  
+    'CreateAccount': {
+      screen: CreateAccount,
     },
     'CreateProject': {
       screen: CreateProject,
-    },  
+    },
     'HomeClient': {
       screen: HomeClient,
     },
     'Projects': {
       screen: Projects,
-    },    
-    'CreateAccount': {
-      screen: CreateAccount,
-    },    
+    }, 
     'FreelancerDetails': {
       screen: FreelancerDetails,
     },
