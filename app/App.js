@@ -11,12 +11,13 @@ import HomeClient from './src/pages/HomeClient';
 import Freelancers from './src/pages/Freelancers';
 
 const AppNavigator = createStackNavigator({
-    'Login': {
-      screen: Login,
-    },  
-    'CreateAccount': {
+  'Login': {
+    screen: Login,
+  },   
+  'CreateAccount': {
       screen: CreateAccount,
-    },
+    },  
+     
     'CreateProject': {
       screen: CreateProject,
     },

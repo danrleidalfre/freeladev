@@ -24,18 +24,6 @@ export default class LoginScreen extends React.Component {
         }
     }
 
-    componentDidMount() {
-        var firebaseConfig = {
-            apiKey: "AIzaSyAJY7cdQ_vMpxhpGbn1_Lc_j89HxQVOb3Y",
-            authDomain: "freeladev-react-native.firebaseapp.com",
-            databaseURL: "https://freeladev-react-native.firebaseio.com",
-            projectId: "freeladev-react-native",
-            storageBucket: "",
-            messagingSenderId: "609165830737",
-            appId: "1:609165830737:web:bf706709fbd2b102a6e670"
-        };
-        firebase.initializeApp(firebaseConfig);        
-    }
 
     onChangeHandler(field, valor) {
         this.setState({
@@ -48,7 +36,6 @@ export default class LoginScreen extends React.Component {
         const {email, password} = this.state;
         firebase
             .auth()
-            .signInWithEmailAndPassword(email, password)
             .then(user => {
                 this.setState({message:"Logado com sucesso"});
             })
@@ -123,13 +110,8 @@ export default class LoginScreen extends React.Component {
                     />
                     {this.renderButton()}
                     {this.renderMessage()}
-                    {/* <TouchableOpacity>
-                        <Text style={styles.btnLogin}>ENTRAR</Text>                        
-                    </TouchableOpacity> */}
                     <Text style={styles.textCreateAccount}>não possui cadastro?</Text>
-                    <TouchableOpacity                        
-                        onPress={() => this.props.navigation.navigate('CreateAccount')}
-                    >
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateAccount')}>
                         <Text style={styles.btnCreateAccount}>cadastre-se aqui.</Text>                        
                     </TouchableOpacity>
                 </FormRow>
