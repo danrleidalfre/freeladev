@@ -10,24 +10,11 @@ export default class CreateAccount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      user: "",
       password: "",
       type: "",
     }
-  }
-
-  componentDidMount() {
-    var firebaseConfig = {
-      apiKey: "AIzaSyAJY7cdQ_vMpxhpGbn1_Lc_j89HxQVOb3Y",
-      authDomain: "freeladev-react-native.firebaseapp.com",
-      databaseURL: "https://freeladev-react-native.firebaseio.com",
-      projectId: "freeladev-react-native",
-      storageBucket: "",
-      messagingSenderId: "609165830737",
-      appId: "1:609165830737:web:bf706709fbd2b102a6e670"
-    };
-    firebase.initializeApp(firebaseConfig);  
-  }
+  }  
 
   onChangeHandler(field, valor) {
     this.setState({
@@ -35,30 +22,19 @@ export default class CreateAccount extends React.Component {
     });
   }
 
-  CreateAccount(){
-    const {email, password, type} = this.state;
-    firebase.database().ref('users/')
-    .push({
-      email,
-      password,
-      type
-    })
-    .then((data)=>{
-      Alert.alert(
-        "Usuário cadastrado com sucesso",
-        "Retornar para a página inicial?",
-        [{            
-          text: 'Não',
-          onPress: () => {this.props.navigation.navigate('CreateAccount')}
-        },{
-          text: 'Sim',
-          onPress: () => {this.props.navigation.navigate('Login')}
-        }]
-      );
-    })
-    .catch((error)=>{
-
-    })
+  CreateAccount() {
+    const {user, password, type} = this.state;
+    if(user == '' || password == '' || type == '') {
+      Alert.alert('preencha todos os campos corretamente!')
+    } else {
+      firebase
+      .database()
+      .ref(`/users/${user}`)
+      .set({password, type})    
+      .then()
+        Alert.alert('usuário criado com sucesso!')
+        this.props.navigation.navigate('Login')
+    }    
   }
 
   render() {    
@@ -79,13 +55,13 @@ export default class CreateAccount extends React.Component {
             onChangeText={valor => {this.onChangeHandler('type', valor)}}
           />
           <TextField
-            label='e-mail'
+            label='usuário'
             baseColor='rgba(255, 255, 255, 255)'
             textColor='rgba(255, 255, 255, 255)'
             tintColor='rgba(255, 255, 255, 255)'
             labelFontSize='20'
-            value={this.state.email}
-            onChangeText={valor => {this.onChangeHandler('email', valor)}}
+            value={this.state.user}
+            onChangeText={valor => {this.onChangeHandler('user', valor)}}
           />
           <TextField
             label='senha'

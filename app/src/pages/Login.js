@@ -6,10 +6,11 @@ import {
     ActivityIndicator,
     Text,
     Alert,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import FormRow from '../components/FormRow';
 import firebase from 'firebase';
+import CreateAccount from './CreateAccount';
 
 export default class LoginScreen extends React.Component {
 
@@ -17,13 +18,13 @@ export default class LoginScreen extends React.Component {
         super(props);
 
         this.state = {
-            email: "",
+            user: "",
             password: "",
+            type: "",
             isLoading: false,
             message: "",
         }
     }
-
 
     onChangeHandler(field, valor) {
         this.setState({
@@ -32,31 +33,28 @@ export default class LoginScreen extends React.Component {
     }
 
     Login() {
-        this.setState({isLoading:true});
-        const {email, password} = this.state;
+        const { user, password } = this.state;
         firebase
-            .auth()
-            .then(user => {
-                this.setState({message:"Logado com sucesso"});
-            })
-            .catch(error => {
-                if(error.code == "auth/user-not-found")
-                    Alert.alert(
-                        "Usuário não encontrado",
-                        "Deseja criar uma nova conta?",
-                        [{
-                            text: 'Não',
-                            onPress: () => {this.props.navigation.navigate('login')}
-                        },{
-                            text: 'Sim',
-                            onPress: () => {this.props.navigation.navigate('CreateAccount')}
-                        }]
-                    );
-                this.setState({message: this.getMessageByError(error.code)});
-            })
-            .then( () => {
-                this.setState({isLoading:false})
-            });
+        .database()
+        .ref(`/users/${user}`)
+        .on('value', snapshot => {            
+            const passwordUser = snapshot.val().password;
+            const typeUser = snapshot.val().type;
+            if(user != '' && password != '') {
+                if(password == passwordUser) {
+                    if(typeUser == 'freelancer') {
+                        this.props.navigation.navigate('Projects')
+                    } else {
+                        this.props.navigation.navigate('HomeClient')
+                    }
+                } else {
+                    Alert.alert('senha incorreta!')
+                }
+            } else {
+                Alert.alert('os campos não podem ficar vazios!')
+            }
+            
+        })
     }
 
     renderButton() {
@@ -97,9 +95,9 @@ export default class LoginScreen extends React.Component {
                 <FormRow>
                     <TextInput
                         style={styles.textInput}
-                        placeholder="e-mail"
-                        value={this.state.email}
-                        onChangeText={valor => {this.onChangeHandler('email', valor)}}
+                        placeholder="usuário"
+                        value={this.state.user}
+                        onChangeText={valor => {this.onChangeHandler('user', valor)}}
                     />
                     <TextInput
                         style={styles.textInput}

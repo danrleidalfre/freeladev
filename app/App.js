@@ -9,12 +9,24 @@ import ProjectDetails from './src/pages/ProjectDetails';
 import Projects from './src/pages/Projects';
 import HomeClient from './src/pages/HomeClient';
 import Freelancers from './src/pages/Freelancers';
+import firebase from 'firebase';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAJY7cdQ_vMpxhpGbn1_Lc_j89HxQVOb3Y",
+  authDomain: "freeladev-react-native.firebaseapp.com",
+  databaseURL: "https://freeladev-react-native.firebaseio.com",
+  projectId: "freeladev-react-native",
+  storageBucket: "",
+  messagingSenderId: "609165830737",
+  appId: "1:609165830737:web:bf706709fbd2b102a6e670"
+};
+firebase.initializeApp(firebaseConfig);
 
 const AppNavigator = createStackNavigator({
-  'Login': {
-    screen: Login,
-  },   
-  'CreateAccount': {
+    'Login': {
+      screen: Login,
+    },   
+    'CreateAccount': {
       screen: CreateAccount,
     },  
      
