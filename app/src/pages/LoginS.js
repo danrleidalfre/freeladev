@@ -5,14 +5,13 @@ import {
     StyleSheet,
     ActivityIndicator,
     Text,
-    Alert,
     TouchableOpacity,
 } from 'react-native';
 import FormRow from '../components/FormRow';
-import firebase from 'firebase';
-import CreateAccount from './CreateAccount';
+import { Login } from '../actions';
+import { connect } from 'react-redux';
 
-export default class LoginScreen extends React.Component {
+class LoginS extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,27 +33,7 @@ export default class LoginScreen extends React.Component {
 
     Login() {
         const { user, password } = this.state;
-        firebase
-        .database()
-        .ref(`/users/${user}`)
-        .on('value', snapshot => {            
-            const passwordUser = snapshot.val().password;
-            const typeUser = snapshot.val().type;
-            if(user != '' && password != '') {
-                if(password == passwordUser) {
-                    if(typeUser == 'freelancer') {
-                        this.props.navigation.navigate('Projects')
-                    } else {
-                        this.props.navigation.navigate('HomeClient')
-                    }
-                } else {
-                    Alert.alert('senha incorreta!')
-                }
-            } else {
-                Alert.alert('os campos não podem ficar vazios!')
-            }
-            
-        })
+        this.props.Login({user, password});   
     }
 
     renderButton() {
@@ -154,3 +133,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 });
+
+export default connect(null, {Login})(LoginS);
