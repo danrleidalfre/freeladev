@@ -8,10 +8,10 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import FormRow from '../components/FormRow';
-import { Login } from '../actions';
+import { processLogin } from '../actions';
 import { connect } from 'react-redux';
 
-class LoginS extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -32,8 +32,9 @@ class LoginS extends React.Component {
     }
 
     Login() {
-        const { user, password } = this.state;
-        this.props.Login({user, password});   
+        const { user } = this.state;
+        let login = { user }
+        this.props.processLogin(login);
     }
 
     renderButton() {
@@ -134,4 +135,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {Login})(LoginS);
+export default connect(null, {processLogin})(Login);

@@ -1,6 +1,6 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import LoginS from './pages/LoginS';
+import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import CreateProject from './pages/CreateProject';
 import FreelancerDetails from './pages/FreelancerDetails';
@@ -23,8 +23,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const AppNavigator = createStackNavigator({
-    'LoginS': {
-      screen: LoginS,
+    'Login': {
+      screen: Login,
     },   
     'CreateAccount': {
       screen: CreateAccount,
