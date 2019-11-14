@@ -32,9 +32,8 @@ class Login extends React.Component {
     }
 
     Login() {
-        const { user } = this.state;
-        let login = { user }
-        this.props.processLogin(login);
+        const { user, password } = this.state;
+        this.props.processLogin({ user, password })
     }
 
     renderButton() {

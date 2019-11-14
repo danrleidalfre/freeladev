@@ -1,81 +1,39 @@
 import firebase from 'firebase';
 
-const USER_LOGIN_SUCESS = 'USER_LOGIN';
-const userLoginSucess = userr => ({
+export const USER_LOGIN_SUCESS = 'USER_LOGIN';
+const userLoginSucess = userLogin => ({
   type: USER_LOGIN_SUCESS,
-  userr
+  userLogin
 })
 
-const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGOUT_SUCESS = 'USER_LOGOUT';
 const userLogout = () => ({
-  type: USER_LOGOUT,
-  userr
+  type: USER_LOGOUT_SUCESS,
+  userLogin
 })
 
-export const processLogin = ({user}) => dispatch => {  
+export const processLogin = ({ user, password }) => dispatch => {  
   firebase
   .database()
   .ref(`/users/${user}`)  
   .on('value', snapshot => {    
     const userObject = {
-      password: snapshot.val().password,
+      passwordUser: snapshot.val().password,
       type: snapshot.val().type,
-      user: user
-    }    
-    const action = userLoginSucess()
-    dispatch(action)
-    return userObject        
+      user: user      
+    }
+    if(password == userObject.passwordUser) {
+      userLogin => {
+        const action = userLoginSucess(userLogin)
+        dispatch(action)
+        return userObject   
+      }     
+    } else if (user == '') {
+      alert('preencha o campo de usuário')
+    } else if (password == '') {
+      alert('preencha o campo de senha')
+    } else {
+      alert('senha incorreta')
+    }
   })
 }
-
-  // const passwordUser = snapshot.val().password;
-    // const typeUser = snapshot.val().type;
-    // if(user != '' && password != '') {
-    //   if(password == passwordUser) {                
-    //     // userr => {
-    //     //     const action = userLoginSucess();
-    //     //     dispatch(action);
-    //     // }        
-    //     if(typeUser == 'freelancer') {
-    //       alert('freelancer')
-    //         // this.props.navigation.navigate('Projects')                    
-    //     } else {
-    //       alert('cliente')
-    //         // this.props.navigation.navigate('HomeClient')
-    //     }
-    //   } else {
-    //     Alert.alert('senha incorreta!')
-    //   }
-    // } else {
-    //   Alert.alert('os campos não podem ficar vazios!')
-    // }  
-
-
-  // .then(user => {
-  //     const action = userLoginSucess();
-  //     dispatch(action);
-  //     alert('foi');
-  //   }
-  // )
-  // .on('value', snapshot => {            
-  //   const passwordUser = snapshot.val().password;
-  //   const typeUser = snapshot.val().type;
-  //   if(user != '' && password != '') {
-  //       if(password == passwordUser) {                
-  //           userr => {
-  //               const action = userLoginSucess();
-  //               dispatch(action);
-  //           }
-            
-  //           if(typeUser == 'freelancer') {
-  //               this.props.navigation.navigate('Projects')                    
-  //           } else {
-  //               this.props.navigation.navigate('HomeClient')
-  //           }
-  //       } else {
-  //           Alert.alert('senha incorreta!')
-  //       }
-  //   } else {
-  //       Alert.alert('os campos não podem ficar vazios!')
-  //   }      
-  // })
