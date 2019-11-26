@@ -25,15 +25,15 @@ firebase.initializeApp(firebaseConfig);
 const AppNavigator = createStackNavigator({
     'Login': {
       screen: Login,
-    },  
+    },
     'HomeClient': {
       screen: HomeClient,
-    },       
-    'CreateAccount': {
-      screen: CreateAccount,
-    },
+    }, 
     'CreateProject': {
       screen: CreateProject,
+    },
+    'CreateAccount': {
+      screen: CreateAccount,
     },
     'Projects': {
       screen: Projects,

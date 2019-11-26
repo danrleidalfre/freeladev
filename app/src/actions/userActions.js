@@ -22,12 +22,10 @@ export const processLogin = ({ user, password }) => dispatch => {
       type: snapshot.val().type,
       user: user      
     }
-    if(password == userObject.passwordUser) {
-      userLogin => {
-        const action = userLoginSucess(userLogin)
-        dispatch(action)
-        return userObject   
-      }     
+    if(password == userObject.passwordUser) {      
+      const action = userLoginSucess(userObject.user)
+      dispatch(action)
+      return userObject         
     } else if (user == '') {
       alert('preencha o campo de usuário')
     } else if (password == '') {

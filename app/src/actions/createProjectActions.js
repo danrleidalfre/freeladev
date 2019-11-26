@@ -10,11 +10,21 @@ export const setField = (field, value) => {
     }
 }
 
-export const saveProject = project => {
-    return async dispatch => {
-        return await firebase
-        .database()
-        .ref('/projects/usuario/')
-        .push(project)
-    }
+export const PROJECT_SAVED_SUCCESS = 'PROJECT_SAVED_SUCCESS';
+export const projectSavedSuccess = () => {
+  return {
+    type: PROJECT_SAVED_SUCCESS
+  }
+}
+
+export const saveProject = ({createProject, user}) => {
+  return async dispatch => {
+    await firebase
+      .database()
+      .ref(`/projects/${user}/`)
+      .push(createProject)
+      console.log(createProject)
+      const action = projectSavedSuccess(createProject)
+      dispatch(action)
+  }    
 }

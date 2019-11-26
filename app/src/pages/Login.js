@@ -34,6 +34,10 @@ class Login extends React.Component {
     Login() {
         const { user, password } = this.state;
         this.props.processLogin({ user, password })
+        const userLogin = this.props.user;
+        if(userLogin) {
+            this.props.navigation.navigate('CreateProject')
+        }
     }
 
     renderButton() {
@@ -134,4 +138,11 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {processLogin})(Login);
+const mapStateToProps = (state) => {
+    return ({
+      user: state.userLogin
+    })
+    
+  }
+
+export default connect(mapStateToProps, {processLogin})(Login);

@@ -33,7 +33,7 @@ export default class CreateAccount extends React.Component {
       .set({password, type})    
       .then()
         Alert.alert('usuário criado com sucesso!')
-        this.props.navigation.navigate('LoginS')
+        this.props.navigation.navigate('Login')
     }    
   }
 
