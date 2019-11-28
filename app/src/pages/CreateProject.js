@@ -3,7 +3,7 @@ import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput, Picker}
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons';
 import { connect } from 'react-redux';
-import { setField, saveProject } from '../actions';
+import { setField, saveProject } from '../actions/createProjectActions';
 
 class CreateProject extends React.Component {  
   constructor(props) {
@@ -55,16 +55,20 @@ class CreateProject extends React.Component {
       <NavigationFooter>
         <TouchableOpacity onPress={() => {
             saveProject({createProject, user})
-            navigation.replace('HomeClient')
+            navigation.goBack()
           } 
         }>
           <Icon style={styles.iconNavigationFooter} name="checkbox" />
           <Text style={styles.btnNavigationFooter}>publicar projeto</Text>                        
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
+          <Icon style={styles.iconNavigationFooter} name="md-home" />
+          <Text style={styles.btnNavigationFooter}>home</Text>                        
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Freelancers')}>
           <Icon style={styles.iconNavigationFooter} name="md-people" />
           <Text style={styles.btnNavigationFooter}>freelancers</Text>                        
-        </TouchableOpacity>
+        </TouchableOpacity>          
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
           <Icon style={styles.iconNavigationFooter} name="exit" />
           <Text style={styles.btnNavigationFooter}>sair</Text>                        

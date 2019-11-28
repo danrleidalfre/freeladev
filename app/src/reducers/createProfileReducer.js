@@ -1,10 +1,8 @@
-import { SET_FIELD } from '../actions/createProjectActions';
+import { SET_FIELD } from '../actions/createProfileActions';
 
 const INITIAL_STATE = {
     nome: '',
-    habilidades: 'full',
-    detalhes: '',
-    contatos: ''
+    descricao: ''
 }
 
 export default function(state = INITIAL_STATE, action) {

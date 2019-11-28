@@ -23,7 +23,6 @@ export const saveProject = ({createProject, user}) => {
       .database()
       .ref(`/projects/${user}/`)
       .push(createProject)
-      console.log(createProject)
       const action = projectSavedSuccess(createProject)
       dispatch(action)
   }    

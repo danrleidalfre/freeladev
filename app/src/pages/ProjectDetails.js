@@ -25,7 +25,7 @@ export default class ProjectDetails extends React.Component {
             <Icon style={styles.iconNavigationFooter} name="md-copy" />
             <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileFreelancer')}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProfile')}>
             <Icon style={styles.iconNavigationFooter} name="md-contact" />
             <Text style={styles.btnNavigationFooter}>meu perfil</Text>                        
           </TouchableOpacity>

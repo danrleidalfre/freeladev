@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import CreateProject from './pages/CreateProject';
 import FreelancerDetails from './pages/FreelancerDetails';
-import ProfileFreelancer from './pages/ProfileFreelancer';
+import CreateProfile from './pages/CreateProfile';
 import ProjectDetails from './pages/ProjectDetails';
 import Projects from './pages/Projects';
 import HomeClient from './pages/HomeClient';
@@ -41,8 +41,8 @@ const AppNavigator = createStackNavigator({
     'FreelancerDetails': {
       screen: FreelancerDetails,
     },
-    'ProfileFreelancer': {
-      screen: ProfileFreelancer,
+    'CreateProfile': {
+      screen: CreateProfile,
     },
     'ProjectDetails': {
       screen: ProjectDetails,

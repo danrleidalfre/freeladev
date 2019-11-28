@@ -1,30 +1,41 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput, Button} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
+import { setField, saveProfile } from '../actions/createProfileActions';
+import { connect } from 'react-redux';
 
-export default class ProfileFreelancer extends React.Component {
+class CreateProfile extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    const {createProfile, user, setField, saveProfile} = this.props;
     return(      
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.content}>
             <View style={styles.avatar}></View>
-            <Text style={styles.name}>nome do freelancer</Text>
-            <View style={styles.tag}>
-              <View style={styles.skill}>
-                <Text style={styles.textSkill}>front</Text>
-              </View>
-              <View style={styles.skill}>
-                <Text style={styles.textSkill}>back</Text>
-              </View>
-              <View style={styles.skill}>
-                <Text style={styles.textSkill}>mobile</Text>
-              </View>
-            </View>
-            <Text style={styles.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="seu nome"
+              value={createProfile.nome}
+              onChangeText={value => setField('nome', value)}
+            /> 
+            <TextInput
+              style={styles.textInput}
+              placeholder="descrição"
+              multiline={true}
+              numberOfLines={6}
+              value={createProfile.descricao}
+              onChangeText={value => setField('descricao', value)}
+            />
+            <Button
+              title="Salvar"
+              onPress={() => {
+                saveProfile({createProfile, user})
+              }}
+            />
           </View>
         </ScrollView>      
         <NavigationFooter>
@@ -32,7 +43,7 @@ export default class ProfileFreelancer extends React.Component {
             <Icon style={styles.iconNavigationFooter} name="md-copy" />
             <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileFreelancer')}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProfile')}>
             <Icon style={styles.iconNavigationFooter} name="md-contact" />
             <Text style={styles.btnNavigationFooter}>meu perfil</Text>                        
           </TouchableOpacity>
@@ -63,6 +74,19 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
+  },
+  textInput: {
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    color: '#00B5FF',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginTop: 15,
+    fontSize: 20,
+    borderWidth: 2,
+    borderColor: '#00B5FF',
+    textAlign: 'center',
+    width: 350
   },
   name: {
     fontSize: 20,
@@ -101,3 +125,18 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+const mapStateToProps = (state) => {
+  return ({
+    createProfile: state.createProfile,
+    user: state.userLogin
+  })
+  
+}
+
+const mapDispatchToProps = {
+  setField,
+  saveProfile
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProfile);

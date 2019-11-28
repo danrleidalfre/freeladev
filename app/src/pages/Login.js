@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import FormRow from '../components/FormRow';
-import { processLogin } from '../actions';
+import { processLogin } from '../actions/userActions';
 import { connect } from 'react-redux';
 
 class Login extends React.Component {
@@ -138,10 +138,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = (state) => {
-    return ({
+const mapStateToProps = state => {
+    
+    return {
       user: state.userLogin
-    })
+    }
     
   }
 

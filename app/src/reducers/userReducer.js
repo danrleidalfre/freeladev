@@ -1,4 +1,4 @@
-import { USER_LOGIN_SUCESS, USER_LOGOUT_SUCESS } from '../actions';
+import { USER_LOGIN_SUCESS, USER_LOGOUT_SUCESS } from '../actions/userActions';
 
 export default function userReducer(state = null, action) {
   switch(action.type) {
