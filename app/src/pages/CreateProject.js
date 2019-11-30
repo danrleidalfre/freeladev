@@ -10,7 +10,7 @@ class CreateProject extends React.Component {
     super(props);
   }
   render() {
-    const {createProject, user, setField, saveProject, navigation} = this.props;
+    const {createProject, setField, saveProject, navigation} = this.props;
     return(
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -54,7 +54,7 @@ class CreateProject extends React.Component {
       </ScrollView>      
       <NavigationFooter>
         <TouchableOpacity onPress={() => {
-            saveProject({createProject, user})
+            saveProject({createProject})
             navigation.goBack()
           } 
         }>

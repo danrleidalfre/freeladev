@@ -21,7 +21,7 @@ export const saveProfile = ({createProfile, user}) => {
   return async dispatch => {
     await firebase
       .database()
-      .ref(`/freelancer/${user}/`)
+      .ref(`/freelancers/`)
       .push(createProfile)
       const action = profileSavedSuccess(createProfile)
       dispatch(action)

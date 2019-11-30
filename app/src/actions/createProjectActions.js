@@ -17,7 +17,7 @@ export const projectSavedSuccess = () => {
   }
 }
 
-export const saveProject = ({createProject, user}) => {
+export const saveProject = ({createProject}) => {
   return async dispatch => {
     await firebase
       .database()

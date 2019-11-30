@@ -23,6 +23,15 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const AppNavigator = createStackNavigator({
+    'Freelancers': {
+      screen: Freelancers,
+    },
+    'HomeClient': {
+      screen: HomeClient,
+    },
+    'CreateProfile': {
+      screen: CreateProfile,
+    },
     'Login': {
       screen: Login,
     }, 
@@ -31,10 +40,7 @@ const AppNavigator = createStackNavigator({
     },    
     'HomeClient': {
       screen: HomeClient,
-    }, 
-    'Login': {
-      screen: Login,
-    },    
+    },       
     'CreateProject': {
       screen: CreateProject,
     },
@@ -43,16 +49,10 @@ const AppNavigator = createStackNavigator({
     },    
     'FreelancerDetails': {
       screen: FreelancerDetails,
-    },
-    'CreateProfile': {
-      screen: CreateProfile,
-    },
+    },    
     'ProjectDetails': {
       screen: ProjectDetails,
-    },  
-    'Freelancers': {
-      screen: Freelancers,
-    },        
+    },            
   }, 
   {
     defaultNavigationOptions: {

@@ -1,134 +1,40 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
+import { connect } from 'react-redux'
+import { watchFreelancers } from '../actions/freelancersActions'
 
-export default class Freelancers extends React.Component {
+class Freelancers extends React.Component {
+  componentDidMount() {
+    this.props.watchFreelancers();
+  }
   render() {
     return(      
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.content}>
-          <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>                
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>                
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
+          <FlatList             
+            data={[...this.props.freelancers]}
+            renderItem={({item, index}) => {
+              return(
+                <View style={styles.card}>
+                  <Text style={styles.name}>{item.nome}</Text>
+                  <View style={styles.avatar}></View>            
+                  <View style={styles.tag}>
+                    <View style={styles.skill}>
+                      <Text style={styles.textSkill}>front</Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
+                    <Text style={styles.btnViewProfile}>ver perfil</Text>                        
+                  </TouchableOpacity>
+                </View>    
+              );
+            }}
+            keyExtractor={item => item.id}
+            numColumns={2}
+          />        
           </View>     
         </ScrollView>      
         <NavigationFooter>
@@ -166,16 +72,18 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    textAlign: 'center'
   },
   card: {
     padding: 15,
     marginTop: 10,
-    width: 190,
+    width: 185,
     borderWidth: 2,
     borderColor: '#00B5FF',
     alignItems: 'center',
     borderRadius: 10,
+    marginHorizontal: 5
   },
   name: {
     fontSize: 15,
@@ -239,3 +147,14 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+const mapStateToProps = state => {
+  const {listFreelancers} = state;
+  const keys = Object.keys(listFreelancers)
+  const listFreelancersID = keys.map(key => {
+    return { ...listFreelancers[key], id: key }
+  })
+  return {freelancers: listFreelancersID}
+}
+
+export default connect(mapStateToProps, { watchFreelancers })(Freelancers)

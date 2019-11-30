@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     nome: '',
     habilidades: 'full-stack',
     detalhes: '',
-    contatos: ''
+    contatos: '',
+    user: 'nome-do-usuario'
 }
 
 export default function(state = INITIAL_STATE, action) {
