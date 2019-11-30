@@ -1,53 +1,42 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
+import { connect } from 'react-redux'
+import { watchProjects } from '../actions/projectsActions'
 
-export default class Projects extends React.Component {
+class Projects extends React.Component {
+  componentDidMount() {
+    this.props.watchProjects();
+  }
+
   render() {
-    return(
+    return(      
       <View style={styles.container}>            
         <ScrollView style={styles.scrollView}>
-          <View style={styles.content}>
-            <View style={styles.card}>
-              <Text style={styles.name}>psd para html</Text>
-              <Text style={styles.description}>Necessito de um freelancer para converter 5 telas de Photoshop para html, utilizando Bootstrap...</Text>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ProjectDetails')}>
-                <Text style={styles.btnViewProject}>ver detalhes</Text>                        
-              </TouchableOpacity>
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>programador laravel</Text>
-              <Text style={styles.description}>Projeto de um site completo utilizando laravel e materialize...</Text>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ProjectDetails')}>
-                <Text style={styles.btnViewProject}>ver detalhes</Text>                        
-              </TouchableOpacity>
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>app nativo</Text>
-              <Text style={styles.description}>Preciso de um app que rode em ios e android necessário também publicar na loja...</Text>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ProjectDetails')}>
-                <Text style={styles.btnViewProject}>ver detalhes</Text>                        
-              </TouchableOpacity>
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-            </View>
+          <View style={styles.content}>          
+          <FlatList 
+              data={[...this.props.projects]}
+              renderItem={({item, index}) => {
+                return(
+                  
+                  <View style={styles.card}>
+                    <Text style={styles.name}>{item.nome}</Text>
+                    <Text style={styles.description}>{item.detalhes}</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ProjectDetails')}>
+                      <Text style={styles.btnViewProject}>ver detalhes</Text>                        
+                    </TouchableOpacity>
+                    <View style={styles.tag}>
+                      <View style={styles.skill}>
+                        <Text style={styles.textSkill}>{item.habilidades}</Text>
+                      </View>
+                    </View>
+                  </View>
+                  
+                );
+              }}
+              keyExtractor={item => item.id}
+            />
           </View>
         </ScrollView>
         <NavigationFooter>
@@ -137,3 +126,14 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },  
 });
+
+const mapStateToProps = state => {
+  const {listProjects} = state;
+  const keys = Object.keys(listProjects)
+  const listProjectsID = keys.map(key => {
+    return { ...listProjects[key], id: key }
+  })
+  return {projects: listProjectsID}
+}
+
+export default connect(mapStateToProps, { watchProjects })(Projects)

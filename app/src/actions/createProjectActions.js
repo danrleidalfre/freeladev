@@ -21,7 +21,7 @@ export const saveProject = ({createProject, user}) => {
   return async dispatch => {
     await firebase
       .database()
-      .ref(`/projects/${user}/`)
+      .ref(`/projects/`)
       .push(createProject)
       const action = projectSavedSuccess(createProject)
       dispatch(action)

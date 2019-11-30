@@ -2,7 +2,7 @@ import { SET_FIELD } from '../actions/createProjectActions';
 
 const INITIAL_STATE = {
     nome: '',
-    habilidades: 'full',
+    habilidades: 'full-stack',
     detalhes: '',
     contatos: ''
 }

@@ -1,2 +1,1 @@
-<h1>app em react native com persistência de dados utilizando firebase</h1>
-<h2><a href="https://github.com/danrleidalfre/freeladev/projects/1?fullscreen=true">confira aqui</a> o andamento do projeto e as etapas a serem feitas</h2>
+<h1>app em react native com persistência de dados utilizando firebase real time</h1>

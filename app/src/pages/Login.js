@@ -20,8 +20,6 @@ class Login extends React.Component {
             user: "",
             password: "",
             type: "",
-            isLoading: false,
-            message: "",
         }
     }
 
@@ -50,28 +48,6 @@ class Login extends React.Component {
         );
     }
 
-    renderMessage() {
-        const {message} = this.state;
-        if(!message)
-            return null;
-        return (
-            <View>
-                <Text style={styles.textMessage}>{message}</Text>
-            </View>
-        )
-    }
-
-    getMessageByError(code) {
-        switch(code) {
-            case "auth/user-not-found":
-                return "Este e-mail não está cadastrado!";
-            case "auth/wrong-password":
-                return "Senha incorreta!";
-            default:
-                return "Preencha os campos corretamente!";
-        }
-    }
-
     render() {
         return(            
             <View>
@@ -90,7 +66,6 @@ class Login extends React.Component {
                         onChangeText={valor => {this.onChangeHandler('password', valor)}}
                     />
                     {this.renderButton()}
-                    {this.renderMessage()}
                     <Text style={styles.textCreateAccount}>não possui cadastro?</Text>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateAccount')}>
                         <Text style={styles.btnCreateAccount}>cadastre-se aqui.</Text>                        

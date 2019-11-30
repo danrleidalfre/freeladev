@@ -28,10 +28,10 @@ class CreateProject extends React.Component {
               onValueChange={(itemValue, itemIndex) =>
                 setField('habilidades', itemValue)
               }>
-              <Picker.Item label="Back-end" value="back" />
-              <Picker.Item label="Front-end" value="front" />
+              <Picker.Item label="Back-end" value="back-end" />
+              <Picker.Item label="Front-end" value="front-end" />
               <Picker.Item label="Mobile" value="mobile" />
-              <Picker.Item label="Full-stack" value="full" />        
+              <Picker.Item label="Full-stack" value="full-stack" />        
             </Picker>
           </View>
           <TextInput
