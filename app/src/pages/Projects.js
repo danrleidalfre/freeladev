@@ -17,7 +17,7 @@ class Projects extends React.Component {
           <View style={styles.content}>          
           <FlatList 
               data={[...this.props.projects]}
-              renderItem={({item, index}) => {
+              renderItem={({item}) => {
                 return(
                   
                   <View style={styles.card}>

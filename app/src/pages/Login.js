@@ -34,7 +34,7 @@ class Login extends React.Component {
         this.props.processLogin({ user, password })
         const userLogin = this.props.user;
         if(userLogin) {
-            this.props.navigation.navigate('CreateProject')
+            this.props.navigation.navigate('HomeClient')
         }
     }
 

@@ -5,26 +5,19 @@ import Icon from 'react-native-ionicons'
 
 export default class ProjectDetails extends React.Component {
   render() {
+    const { freelancer } = this.props.navigation.state.params;
     return(      
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.content}>
             <View style={styles.avatar}></View>
-            <Text style={styles.name}>nome do freelancer</Text>
+            <Text style={styles.name}>{freelancer.nome}</Text>
             <View style={styles.tag}>
               <View style={styles.skill}>
-                <Text style={styles.textSkill}>front</Text>
-              </View>
-              <View style={styles.skill}>
-                <Text style={styles.textSkill}>back</Text>
-              </View>
-              <View style={styles.skill}>
-                <Text style={styles.textSkill}>mobile</Text>
+                <Text style={styles.textSkill}>habilidades</Text>
               </View>
             </View>
-            <Text style={styles.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </Text>
+            <Text style={styles.description}>{freelancer.descricao}</Text>
           </View>
         </ScrollView>      
         <NavigationFooter>
@@ -33,9 +26,13 @@ export default class ProjectDetails extends React.Component {
             <Text style={styles.btnNavigationFooter}>criar projeto</Text>                        
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
+            <Icon style={styles.iconNavigationFooter} name="md-home" />
+            <Text style={styles.btnNavigationFooter}>home</Text>                        
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Freelancers')}>
             <Icon style={styles.iconNavigationFooter} name="md-people" />
             <Text style={styles.btnNavigationFooter}>freelancers</Text>                        
-          </TouchableOpacity>
+          </TouchableOpacity>          
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
             <Icon style={styles.iconNavigationFooter} name="exit" />
             <Text style={styles.btnNavigationFooter}>sair</Text>                        

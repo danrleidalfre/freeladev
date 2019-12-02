@@ -15,6 +15,6 @@ export const watchFreelancers = () => {
                 const freelancers = snapshot.val()
                 const action = setFreelancers(freelancers)
                 dispatch(action)
-            })
+            })            
     }
 }

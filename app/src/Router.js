@@ -22,12 +22,12 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-const AppNavigator = createStackNavigator({
-    'Freelancers': {
-      screen: Freelancers,
-    },
+const AppNavigator = createStackNavigator({    
     'HomeClient': {
       screen: HomeClient,
+    },
+    'Freelancers': {
+      screen: Freelancers,
     },
     'CreateProfile': {
       screen: CreateProfile,

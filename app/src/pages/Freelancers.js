@@ -8,7 +8,7 @@ import { watchFreelancers } from '../actions/freelancersActions'
 class Freelancers extends React.Component {
   componentDidMount() {
     this.props.watchFreelancers();
-  }
+  }  
   render() {
     return(      
       <View style={styles.container}>
@@ -16,7 +16,7 @@ class Freelancers extends React.Component {
           <View style={styles.content}>
           <FlatList             
             data={[...this.props.freelancers]}
-            renderItem={({item, index}) => {
+            renderItem={({item}) => {
               return(
                 <View style={styles.card}>
                   <Text style={styles.name}>{item.nome}</Text>
@@ -26,7 +26,7 @@ class Freelancers extends React.Component {
                       <Text style={styles.textSkill}>front</Text>
                     </View>
                   </View>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails', {freelancer: item})}>
                     <Text style={styles.btnViewProfile}>ver perfil</Text>                        
                   </TouchableOpacity>
                 </View>    

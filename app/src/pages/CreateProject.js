@@ -3,11 +3,20 @@ import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput, Picker}
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons';
 import { connect } from 'react-redux';
-import { setField, saveProject } from '../actions/createProjectActions';
+import { setField, saveProject, setAllFields, resetForm } from '../actions/createProjectActions';
 
 class CreateProject extends React.Component {  
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    const {navigation, setAllFields, resetForm} = this.props;
+    const {params} = navigation.state;
+    if(params && params.project) {
+      setAllFields(params.project)
+    } else {
+      resetForm();
+    }
   }
   render() {
     const {createProject, setField, saveProject, navigation} = this.props;
@@ -59,7 +68,7 @@ class CreateProject extends React.Component {
           } 
         }>
           <Icon style={styles.iconNavigationFooter} name="checkbox" />
-          <Text style={styles.btnNavigationFooter}>publicar projeto</Text>                        
+          <Text style={styles.btnNavigationFooter}>salvar projeto</Text>                        
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
           <Icon style={styles.iconNavigationFooter} name="md-home" />
@@ -158,7 +167,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   setField,
-  saveProject
+  saveProject,
+  setAllFields,
+  resetForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);

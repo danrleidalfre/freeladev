@@ -1,125 +1,40 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
+import { connect } from 'react-redux'
+import { watchProjects } from '../actions/projectsActions'
+import { deleteProject } from '../actions/createProjectActions';
 
-export default class ProjectDetails extends React.Component {
+class HomeClient extends React.Component {
+  componentDidMount() {
+    this.props.watchProjects();
+  }
   render() {
-    return(      
+    return(    
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
-          <Text style={styles.title}>freelancers</Text>
-          <View style={styles.content}>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>                
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>front</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.name}>nome do freelancer</Text>
-              <View style={styles.avatar}></View>            
-              <View style={styles.tag}>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>back</Text>
-                </View>
-                <View style={styles.skill}>
-                  <Text style={styles.textSkill}>mobile</Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails')}>
-                <Text style={styles.btnViewProfile}>ver perfil</Text>                        
-              </TouchableOpacity>
-            </View>            
-          </View>
-          <View style={styles.containerCenter}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Freelancers')}>
-              <Text style={styles.btnAllFreelancers}>ver todos</Text>                        
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.title}>seus projetos</Text>
-          <View style={styles.cardProject}>
-            <Text style={styles.nameProject}>converter psd para bootstrap</Text>
-            <View style={styles.containerBtn}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
-                <Text style={styles.btnRemoveProject}>excluir</Text>                        
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProject')}>
-                <Text style={styles.btnEditProject}>editar</Text>                        
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.cardProject}>
-            <Text style={styles.nameProject}>converter psd para bootstrap</Text>
-            <View style={styles.containerBtn}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
-                <Text style={styles.btnRemoveProject}>excluir</Text>                        
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProject')}>
-                <Text style={styles.btnEditProject}>editar</Text>                        
-              </TouchableOpacity>
-            </View>
-          </View> 
-          <View style={styles.cardProject}>
-            <Text style={styles.nameProject}>converter psd para bootstrap</Text>
-            <View style={styles.containerBtn}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
-                <Text style={styles.btnRemoveProject}>excluir</Text>                        
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProject')}>
-                <Text style={styles.btnEditProject}>editar</Text>                        
-              </TouchableOpacity>
-            </View>
-          </View> 
-          <View style={styles.cardProject}>
-            <Text style={styles.nameProject}>converter psd para bootstrap</Text>
-            <View style={styles.containerBtn}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
-                <Text style={styles.btnRemoveProject}>excluir</Text>                        
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProject')}>
-                <Text style={styles.btnEditProject}>editar</Text>                        
-              </TouchableOpacity>
-            </View>
+        <Text style={styles.title}>seus projetos</Text>
+          <View style={styles.content}>          
+            <FlatList 
+              data={[...this.props.projects]}
+              renderItem={({item}) => {
+                return(                  
+                  <View style={styles.cardProject}>                    
+                    <Text style={styles.nameProject}>{item.nome}</Text>
+                    <View style={styles.containerBtn}>
+                      <TouchableOpacity onPress={ async () => await this.props.deleteProject(item)}>
+                        <Text style={styles.btnRemoveProject}>excluir</Text>                        
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => this.props.navigation.replace('CreateProject', {project: item})}>
+                        <Text style={styles.btnEditProject}>editar</Text>                        
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                );
+              }}
+              keyExtractor={item => item.id}
+            />
           </View>
         </ScrollView>      
         <NavigationFooter>
@@ -166,72 +81,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },  
-  card: {
-    padding: 15,
-    marginTop: 10,
-    width: 190,
-    borderWidth: 2,
-    borderColor: '#00B5FF',
-    alignItems: 'center',
-    borderRadius: 10,
-  },
-  name: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  avatar: {
-    backgroundColor: '#E6E5E5',
-    width: 100,
-    height: 100,
-    borderRadius: 75,
-    borderWidth: 2,
-    borderColor: '#00B5FF',
-    marginVertical: 10,
-  },
-  tag: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  skill: {
-    borderWidth: 2,
-    borderColor: '#707070',
-    paddingHorizontal: 10,
-    borderRadius: 20,
-  },
-  textSkill: {
-    fontSize: 13,
-  },
-  btnViewProfile: {
-    backgroundColor: '#00B5FF',
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-    width: 120,
-    borderRadius: 15,
-    textAlign: 'center',
-    justifyContent: 'center',    
-  },
-  containerCenter: {
-    alignItems: 'center'
-  },
-  btnAllFreelancers: {
-    borderWidth: 2,
-    borderColor: '#00B5FF',
-    color: '#00B5FF',
-    fontSize: 22,
-    fontWeight: 'bold',
-    width: 150,
-    borderRadius: 20,
-    textAlign: 'center',
-    marginTop: 10,
-  },
   cardProject: {
     padding: 15,
     marginTop: 10,
-    width: 380,
+    width: 390,
     borderWidth: 2,
     borderColor: '#00B5FF',
     alignItems: 'center',
@@ -256,7 +109,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   btnEditProject: {
-    backgroundColor: '#00B5FF',
+    backgroundColor: '#00B5EE',
     color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
@@ -276,3 +129,19 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+const mapStateToProps = state => {
+  const {listProjects} = state;
+  const keys = Object.keys(listProjects)
+  const listProjectsID = keys.map(key => {
+    return { ...listProjects[key], id: key }
+  })
+  return {projects: listProjectsID}
+}
+
+const mapDispatchToProps = {
+  watchProjects,
+  deleteProject
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeClient)
