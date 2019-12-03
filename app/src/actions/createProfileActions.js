@@ -17,13 +17,14 @@ export const profileSavedSuccess = () => {
   }
 }
 
-export const saveProfile = ({createProfile, user}) => {
-  return async dispatch => {
+
+export const saveProfile = ({createProfile}) => {
+  return async dispatch => {    
     await firebase
       .database()
-      .ref(`/freelancers/`)
-      .push(createProfile)
-      const action = profileSavedSuccess(createProfile)
-      dispatch(action)
-  }    
+      .ref(`/freelancers/${createProfile.nome}`)
+      .set(createProfile)
+    const action = profileSavedSuccess(createProfile)
+    dispatch(action)     
+  }  
 }

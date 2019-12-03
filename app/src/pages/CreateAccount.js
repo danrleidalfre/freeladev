@@ -24,17 +24,30 @@ export default class CreateAccount extends React.Component {
 
   CreateAccount() {
     const {user, password, type} = this.state;
-    if(user == '' || password == '' || type == '') {
+    if (user == '' || password == '' || type == '') {
       Alert.alert('preencha todos os campos corretamente!')
+    } else if (type === 'freelancer') {
+      firebase
+        .database()
+        .ref(`/users/${user}`)
+        .set({password, type})
+        .then() 
+          firebase
+            .database()
+            .ref(`/freelancers/${user}`)
+            .set({nome:user})
+            .then() 
+              Alert.alert('sucesso! utilize as credenciais criadas para acessar o sistema')
+              this.props.navigation.navigate('Login')
     } else {
       firebase
-      .database()
-      .ref(`/users/${user}`)
-      .set({password, type})    
-      .then()
-        Alert.alert('usuário criado com sucesso!')
-        this.props.navigation.navigate('Login')
-    }    
+        .database()
+        .ref(`/users/${user}`)
+        .set({password, type})    
+        .then() 
+          Alert.alert('sucesso! utilize as credenciais criadas para acessar o sistema')
+          this.props.navigation.navigate('Login')
+    }   
   }
 
   render() {    

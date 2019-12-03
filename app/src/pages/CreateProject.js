@@ -12,8 +12,8 @@ class CreateProject extends React.Component {
   componentDidMount() {
     const {navigation, setAllFields, resetForm} = this.props;
     const {params} = navigation.state;
-    if(params && params.project) {
-      setAllFields(params.project)
+    if(params && params.projectEdit) {
+      setAllFields(params.projectEdit)
     } else {
       resetForm();
     }
@@ -51,7 +51,6 @@ class CreateProject extends React.Component {
       <NavigationFooter>
         <TouchableOpacity onPress={() => {            
             createProject.usuario = user.user
-            setField('usuario', user.user)
             saveProject({createProject})
             navigation.navigate('HomeClient')
           } 

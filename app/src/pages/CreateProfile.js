@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput, Button} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 import { setField, saveProfile } from '../actions/createProfileActions';
@@ -10,42 +10,42 @@ class CreateProfile extends React.Component {
     super(props);
   }
   render() {
-    const {createProfile, user, setField, saveProfile} = this.props;
-    return(      
+    const {createProfile, setField, saveProfile, user, navigation} = this.props;
+    return(            
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.content}>
             <View style={styles.avatar}></View>
-            <TextInput
+            {/* <TextInput
               style={styles.textInput}
               placeholder="seu nome"
               value={createProfile.nome}
               onChangeText={value => setField('nome', value)}
-            /> 
+            />  */}
+            <Text style={styles.name}>{user.user}</Text>
             <TextInput
               style={styles.textInput}
               placeholder="descrição"
               multiline={true}
-              numberOfLines={6}
+              numberOfLines={10}
               value={createProfile.descricao}
               onChangeText={value => setField('descricao', value)}
             />
-            <Button
-              title="Salvar"
-              onPress={() => {
-                saveProfile({createProfile, user})
-              }}
-            />
           </View>
         </ScrollView>      
-        <NavigationFooter>
+        <NavigationFooter>          
+          <TouchableOpacity onPress={() => {
+              createProfile.nome = user.user
+              saveProfile({createProfile})              
+              navigation.navigate('Projects')
+            }
+          }>
+            <Icon style={styles.iconNavigationFooter} name="checkbox" />
+            <Text style={styles.btnNavigationFooter}>salvar perfil</Text>                        
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Projects')}>
             <Icon style={styles.iconNavigationFooter} name="md-copy" />
             <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProfile')}>
-            <Icon style={styles.iconNavigationFooter} name="md-contact" />
-            <Text style={styles.btnNavigationFooter}>meu perfil</Text>                        
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
             <Icon style={styles.iconNavigationFooter} name="exit" />
@@ -89,9 +89,10 @@ const styles = StyleSheet.create({
     width: 350
   },
   name: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     paddingVertical: 10,
+    color: '#00B5FF',
   },
   tag: {
     flex: 1,
@@ -131,7 +132,6 @@ const mapStateToProps = (state) => {
     createProfile: state.createProfile,
     user: state.userLogin
   })
-  
 }
 
 const mapDispatchToProps = {

@@ -5,30 +5,29 @@ import Icon from 'react-native-ionicons'
 
 export default class ProjectDetails extends React.Component {
   render() {
+    const { project } = this.props.navigation.state.params;
     return(      
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.content}>
             <View style={styles.card}>
-              <Text style={styles.name}>psd para html</Text>
-              <Text style={styles.description}>Necessito de um freelancer para converter 5 telas de Photoshop para html, utilizando Bootstrap, deve ser feito com boas práticas do HTML5 e ser responsivo.</Text>
-              <Text style={styles.name}>contato</Text>
-              <Text style={styles.contact}>Nome: Agência</Text>
-              <Text style={styles.contact}>E-mail: contato@agencia.com.br</Text>
-              <Text style={styles.contact} onPress={() => {Linking.openURL('http://wa.me/send?phone=43' + 991141402);}}>WhatsApp: (00) 999 999 999</Text>
-              <Text style={styles.contact}>Skype: agencialive</Text>
+              <Text style={styles.nameProject}>{project.nome}</Text>
+              <Text style={styles.name}>detalhes</Text>
+              <Text style={styles.description}>{project.detalhes}</Text>
+              <Text style={styles.name}>contatos</Text>
+              <Text style={styles.contact}>{project.contatos}</Text>
             </View>
           </View>
         </ScrollView>      
         <NavigationFooter>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Projects')}>
-            <Icon style={styles.iconNavigationFooter} name="md-copy" />
-            <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProfile')}>
             <Icon style={styles.iconNavigationFooter} name="md-contact" />
             <Text style={styles.btnNavigationFooter}>meu perfil</Text>                        
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Projects')}>
+            <Icon style={styles.iconNavigationFooter} name="md-copy" />
+            <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
+          </TouchableOpacity>          
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
             <Icon style={styles.iconNavigationFooter} name="exit" />
             <Text style={styles.btnNavigationFooter}>sair</Text>                        
@@ -60,9 +59,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
   },
+  nameProject: {
+    fontSize: 20,
+    color: '#00B5FF',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10
+  },
   name: {
     fontSize: 20,
-    fontWeight: 'bold',
+    color: '#00B5FF',
+    fontWeight: 'normal',
     textAlign: 'center'
   },
   description: {

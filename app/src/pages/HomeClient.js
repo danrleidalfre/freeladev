@@ -4,11 +4,12 @@ import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 import { connect } from 'react-redux'
 import { watchProjects } from '../actions/projectsActions'
-import { deleteProject } from '../actions/createProjectActions';
+import { deleteProject, resetForm } from '../actions/createProjectActions';
 
 class HomeClient extends React.Component {
   componentDidMount() {
     this.props.watchProjects();
+    resetForm();
   }
   render() {
     return(    
@@ -26,7 +27,7 @@ class HomeClient extends React.Component {
                       <TouchableOpacity onPress={ async () => await this.props.deleteProject(item)}>
                         <Text style={styles.btnRemoveProject}>excluir</Text>                        
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => this.props.navigation.replace('CreateProject', {project: item})}>
+                      <TouchableOpacity onPress={() => this.props.navigation.replace('CreateProject', {projectEdit: item})}>
                         <Text style={styles.btnEditProject}>editar</Text>                        
                       </TouchableOpacity>
                     </View>
@@ -38,7 +39,12 @@ class HomeClient extends React.Component {
           </View>
         </ScrollView>      
         <NavigationFooter>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateProject')}>
+          <TouchableOpacity onPress={() => {
+            resetForm();
+            this.props.navigation.navigate('CreateProject')
+          }
+            
+          }>
             <Icon style={styles.iconNavigationFooter} name="md-add-circle" />
             <Text style={styles.btnNavigationFooter}>criar projeto</Text>                        
           </TouchableOpacity>
@@ -141,7 +147,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   watchProjects,
-  deleteProject
+  deleteProject,
+  resetForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeClient)
