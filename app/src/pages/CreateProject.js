@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput, Picker} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons';
 import { connect } from 'react-redux';
@@ -19,7 +19,7 @@ class CreateProject extends React.Component {
     }
   }
   render() {
-    const {createProject, setField, saveProject, navigation} = this.props;
+    const {createProject, setField, saveProject, navigation, user} = this.props;
     return(
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -30,19 +30,6 @@ class CreateProject extends React.Component {
             value={createProject.nome}
             onChangeText={value => setField('nome', value)}
           />
-          <View style={styles.skills}>
-            <Text style={styles.textSkills}>habilidades</Text>
-            <Picker
-              selectedValue={createProject.habilidades}
-              onValueChange={(itemValue, itemIndex) =>
-                setField('habilidades', itemValue)
-              }>
-              <Picker.Item label="Back-end" value="back-end" />
-              <Picker.Item label="Front-end" value="front-end" />
-              <Picker.Item label="Mobile" value="mobile" />
-              <Picker.Item label="Full-stack" value="full-stack" />        
-            </Picker>
-          </View>
           <TextInput
             style={styles.textInput}
             placeholder="detalhes do projeto"
@@ -62,10 +49,11 @@ class CreateProject extends React.Component {
         </View>
       </ScrollView>      
       <NavigationFooter>
-        <TouchableOpacity onPress={() => {
-            setField('nome', this.props.user.user)
+        <TouchableOpacity onPress={() => {            
+            createProject.usuario = user.user
+            setField('usuario', user.user)
             saveProject({createProject})
-            navigation.goBack()
+            navigation.navigate('HomeClient')
           } 
         }>
           <Icon style={styles.iconNavigationFooter} name="checkbox" />
@@ -162,8 +150,7 @@ const mapStateToProps = (state) => {
   return ({
     createProject: state.createProject,
     user: state.userLogin
-  })
-  
+  })  
 }
 
 const mapDispatchToProps = {

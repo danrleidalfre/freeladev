@@ -32,7 +32,6 @@ class Login extends React.Component {
     Login() {
         const { user, password } = this.state;
         this.props.processLogin({ user, password }, result => {
-            console.log(result)
             if(result.typeUser == 'freelancer') {
                 this.props.navigation.navigate('Projects')
             } else {
@@ -118,7 +117,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    console.log('teste', state.userLogin)
     return {
       user: state.userLogin
     }

@@ -3,10 +3,9 @@ import { SET_FIELD, SET_ALL_FIELDS, RESET_FORM } from '../actions/createProjectA
 const INITIAL_STATE = {
     id: null,
     nome: '',
-    habilidades: 'full-stack',
     detalhes: '',
     contatos: '',
-    user: ''
+    usuario: ''
 }
 
 export default function(state = INITIAL_STATE, action) {
