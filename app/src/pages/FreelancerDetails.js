@@ -12,11 +12,6 @@ export default class ProjectDetails extends React.Component {
           <View style={styles.content}>
             <View style={styles.avatar}></View>
             <Text style={styles.name}>{freelancer.nome}</Text>
-            <View style={styles.tag}>
-              <View style={styles.skill}>
-                <Text style={styles.textSkill}>habilidades</Text>
-              </View>
-            </View>
             <Text style={styles.description}>{freelancer.descricao}</Text>
           </View>
         </ScrollView>      

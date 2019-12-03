@@ -20,12 +20,7 @@ class Freelancers extends React.Component {
               return(
                 <View style={styles.card}>
                   <Text style={styles.name}>{item.nome}</Text>
-                  <View style={styles.avatar}></View>            
-                  <View style={styles.tag}>
-                    <View style={styles.skill}>
-                      <Text style={styles.textSkill}>front</Text>
-                    </View>
-                  </View>
+                  <View style={styles.avatar}></View>
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('FreelancerDetails', {freelancer: item})}>
                     <Text style={styles.btnViewProfile}>ver perfil</Text>                        
                   </TouchableOpacity>

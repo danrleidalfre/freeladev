@@ -63,6 +63,7 @@ class CreateProject extends React.Component {
       </ScrollView>      
       <NavigationFooter>
         <TouchableOpacity onPress={() => {
+            setField('nome', this.props.user.user)
             saveProject({createProject})
             navigation.goBack()
           } 

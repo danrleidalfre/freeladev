@@ -12,20 +12,20 @@ const userLogout = () => ({
   userLogin
 })
 
-export const processLogin = ({ user, password }) => dispatch => { 
+export const processLogin = ({ user, password }, callback) => dispatch => { 
   firebase
   .database()
   .ref(`/users/${user}`)  
   .on('value', snapshot => {    
     const userObject = {
       passwordUser: snapshot.val().password,
-      type: snapshot.val().type,
+      typeUser: snapshot.val().type,
       user: user      
     }
-    if(password == userObject.passwordUser) {      
-      const action = userLoginSucess(userObject.user)
-      dispatch(action)      
-      return userObject
+    if(password == userObject.passwordUser) {    
+      const action = userLoginSucess(userObject)
+      dispatch(action) 
+      callback(userObject)
     } else if (user == '') {
       alert('preencha o campo de usuário')
     } else if (password == '') {

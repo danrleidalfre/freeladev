@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     habilidades: 'full-stack',
     detalhes: '',
     contatos: '',
-    user: 'nome-do-usuario'
+    user: ''
 }
 
 export default function(state = INITIAL_STATE, action) {

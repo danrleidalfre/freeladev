@@ -31,11 +31,15 @@ class Login extends React.Component {
 
     Login() {
         const { user, password } = this.state;
-        this.props.processLogin({ user, password })
-        const userLogin = this.props.user;
-        if(userLogin) {
-            this.props.navigation.navigate('HomeClient')
-        }
+        this.props.processLogin({ user, password }, result => {
+            console.log(result)
+            if(result.typeUser == 'freelancer') {
+                this.props.navigation.navigate('Projects')
+            } else {
+                this.props.navigation.navigate('HomeClient')
+            }
+        }) 
+      
     }
 
     renderButton() {
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    
+    console.log('teste', state.userLogin)
     return {
       user: state.userLogin
     }
