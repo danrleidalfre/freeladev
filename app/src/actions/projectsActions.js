@@ -21,7 +21,7 @@ export const watchProjects = (user) => {
     }
 }
 
-export const watchAllProjects = (user) => {
+export const watchAllProjects = () => {
     return dispatch => {
         firebase
             .database()

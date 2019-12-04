@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { Alert } from 'react-native';
 
 export const SET_FIELD = 'SET_FIELD';
 
@@ -48,24 +47,4 @@ export const saveProject = ({createProject}) => {
     const action = projectSavedSuccess(createProject)
     dispatch(action)
   }    
-}
-
-export const deleteProject = (item) => {
-  Alert.alert(
-    'apagar projeto',
-    'tem certeza que deseja excluir o projeto este projeto?',
-    [      
-      {
-        text: 'Não',
-        onPress: () => null,
-        style: 'cancel',
-      },
-      {text: 'Sim', onPress: () => 
-        firebase
-          .database()
-          .ref(`/projects/${item.id}`)
-          .remove()},
-    ],
-    {cancelable: false},
-  );
 }

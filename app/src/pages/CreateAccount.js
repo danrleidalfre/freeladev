@@ -37,7 +37,7 @@ export default class CreateAccount extends React.Component {
             .ref(`/freelancers/${user}`)
             .set({
               nome: user,
-              descricao: 'fale sobre você!'
+              descricao: ''
             })
             .then() 
               Alert.alert('sucesso! utilize as credenciais criadas para acessar o sistema')

@@ -14,6 +14,7 @@ class Projects extends React.Component {
     return(      
       <View style={styles.container}>            
         <ScrollView style={styles.scrollView}>
+          <Text style={styles.title}>projetos publicados</Text>
           <View style={styles.content}>          
           <FlatList 
               data={[...this.props.projects]}
@@ -60,6 +61,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
   },
+  title: {
+    fontSize: 25,
+    color: '#00B5FF',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }, 
   content: {
     flex: 1,
     alignItems: 'center',

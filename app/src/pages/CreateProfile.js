@@ -13,17 +13,35 @@ class CreateProfile extends React.Component {
   }
   
   DeleteProfile(user) {
-    firebase
-    .database()
-    .ref(`/freelancers/${user}`)
-    .remove()
-      firebase
-        .database()
-        .ref(`/users/${user}`)
-        .remove()
-          this.props.navigation.navigate('Login')
+    Alert.alert(
+      'apagar perfil',
+      `${user}, tem certeza que deseja excluir seu perfil?`,
+      [      
+        {
+          text: 'Não',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'Sim', onPress: () => 
+          this.ConfirmDeleteProfile(user)
+        },
+      ],
+      {cancelable: false},
+    );
   }
-  
+
+  ConfirmDeleteProfile(user) {
+    firebase
+      .database()
+      .ref(`/freelancers/${user}`)
+      .remove()
+        firebase
+          .database()
+          .ref(`/users/${user}`)
+          .remove()
+            this.props.navigation.navigate('Login')
+  }
+    
   render() {
     const {createProfile, setField, saveProfile, user, navigation} = this.props;
     return(            
@@ -38,7 +56,7 @@ class CreateProfile extends React.Component {
               multiline={true}
               numberOfLines={11}
               value={createProfile.descricao}
-              onChangeText={value => setField('descricao', value)}
+              onChangeText={value => setField('descricao', value)}              
             />
           </Content>
         </ScrollView>      
@@ -52,7 +70,6 @@ class CreateProfile extends React.Component {
             <Icon style={styles.iconNavigationFooter} name="checkbox" />
             <Text style={styles.btnNavigationFooter}>salvar perfil</Text>                        
           </TouchableOpacity>
-
           <TouchableOpacity onPress={() => this.DeleteProfile(user.user)}>
             <Icon style={styles.iconNavigationFooter} name="close" />
             <Text style={styles.btnNavigationFooter}>apagar perfil</Text>                        

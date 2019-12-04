@@ -12,7 +12,7 @@ class Freelancers extends React.Component {
   render() {
     return(      
       <View style={styles.container}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}>          
           <View style={styles.content}>
           <FlatList             
             data={[...this.props.freelancers]}
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#fff',
     paddingHorizontal: 10,
-  },
+  },  
   content: {
     flex: 1,
     flexDirection: 'row',
