@@ -4,14 +4,14 @@ import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 import { connect } from 'react-redux'
 import { watchProjects } from '../actions/projectsActions'
-import { deleteProject, resetForm } from '../actions/createProjectActions';
+import { deleteProject } from '../actions/createProjectActions';
 
-class HomeClient extends React.Component {
+class HomeClient extends React.Component {  
   componentDidMount() {
-    this.props.watchProjects();
-    resetForm();
+    const {user} = this.props;
+    this.props.watchProjects(user.user);
   }
-  render() {
+  render() {    
     return(    
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
@@ -40,11 +40,8 @@ class HomeClient extends React.Component {
         </ScrollView>      
         <NavigationFooter>
           <TouchableOpacity onPress={() => {
-            resetForm();
             this.props.navigation.navigate('CreateProject')
-          }
-            
-          }>
+          }}>
             <Icon style={styles.iconNavigationFooter} name="md-add-circle" />
             <Text style={styles.btnNavigationFooter}>criar projeto</Text>                        
           </TouchableOpacity>
@@ -140,15 +137,17 @@ const mapStateToProps = state => {
   const {listProjects} = state;
   const keys = Object.keys(listProjects)
   const listProjectsID = keys.map(key => {
-    return { ...listProjects[key], id: key }
+    return { ...listProjects[key], id: key }    
   })
-  return {projects: listProjectsID}
+  return ({
+    projects: listProjectsID,
+    user: state.userLogin
+  })
 }
 
 const mapDispatchToProps = {
   watchProjects,
-  deleteProject,
-  resetForm
+  deleteProject
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeClient)

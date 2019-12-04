@@ -6,11 +6,13 @@ const setProjects = projects => ({
     projects: projects
 })
 
-export const watchProjects = () => {
+export const watchProjects = (user) => {
     return dispatch => {
         firebase
             .database()
             .ref(`/projects/`)
+            .orderByChild("usuario")
+            .equalTo(user)
             .on('value', snapshot => {
                 const projects = snapshot.val()
                 const action = setProjects(projects)

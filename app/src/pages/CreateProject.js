@@ -58,18 +58,6 @@ class CreateProject extends React.Component {
           <Icon style={styles.iconNavigationFooter} name="checkbox" />
           <Text style={styles.btnNavigationFooter}>salvar projeto</Text>                        
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeClient')}>
-          <Icon style={styles.iconNavigationFooter} name="md-home" />
-          <Text style={styles.btnNavigationFooter}>home</Text>                        
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Freelancers')}>
-          <Icon style={styles.iconNavigationFooter} name="md-people" />
-          <Text style={styles.btnNavigationFooter}>freelancers</Text>                        
-        </TouchableOpacity>          
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-          <Icon style={styles.iconNavigationFooter} name="exit" />
-          <Text style={styles.btnNavigationFooter}>sair</Text>                        
-        </TouchableOpacity>
       </NavigationFooter>
     </View>
     );
