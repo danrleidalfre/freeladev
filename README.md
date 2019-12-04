@@ -1,1 +1,0 @@
-<h1>app em react native com persistência de dados utilizando firebase real time</h1>
