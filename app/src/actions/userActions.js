@@ -16,7 +16,7 @@ export const processLogin = ({ user, password }, callback) => dispatch => {
   firebase
   .database()
   .ref(`/users/${user}`)  
-  .on('value', snapshot => {    
+  .once('value', snapshot => {    
     const userObject = {
       passwordUser: snapshot.val().password,
       typeUser: snapshot.val().type,

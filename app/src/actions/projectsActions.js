@@ -20,3 +20,16 @@ export const watchProjects = (user) => {
             })
     }
 }
+
+export const watchAllProjects = (user) => {
+    return dispatch => {
+        firebase
+            .database()
+            .ref(`/projects/`)
+            .on('value', snapshot => {
+                const projects = snapshot.val()
+                const action = setProjects(projects)
+                dispatch(action)
+            })
+    }
+}

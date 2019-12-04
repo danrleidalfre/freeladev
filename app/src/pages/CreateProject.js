@@ -34,7 +34,7 @@ class CreateProject extends React.Component {
             style={styles.textInput}
             placeholder="detalhes do projeto"
             multiline={true}
-            numberOfLines={6}
+            numberOfLines={8}
             value={createProject.detalhes}
             onChangeText={value => setField('detalhes', value)}
           />
@@ -42,7 +42,7 @@ class CreateProject extends React.Component {
             style={styles.textInput}
             placeholder="contatos"
             multiline={true}
-            numberOfLines={6}
+            numberOfLines={8}
             value={createProject.contatos}
             onChangeText={value => setField('contatos', value)}
           />

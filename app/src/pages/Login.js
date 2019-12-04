@@ -35,7 +35,7 @@ class Login extends React.Component {
             if(result.typeUser == 'freelancer') {
                 this.props.navigation.navigate('Projects')
             } else {
-                this.props.navigation.navigate('HomeClient')
+                this.props.navigation.navigate('CreateProject')
             }
         }) 
       
@@ -45,7 +45,7 @@ class Login extends React.Component {
         if(this.state.isLoading)
             return <ActivityIndicator />;
         return(
-            <TouchableOpacity onPress={() => this.Login()}>
+            <TouchableOpacity onPress={ () => this.Login()}>
                 <Text style={styles.btnLogin}>ENTRAR</Text>                        
             </TouchableOpacity>
         );

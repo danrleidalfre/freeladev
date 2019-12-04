@@ -11,12 +11,12 @@ class HomeClient extends React.Component {
     const {user} = this.props;
     this.props.watchProjects(user.user);
   }
-  render() {    
+  render() {
     return(    
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
         <Text style={styles.title}>seus projetos</Text>
-          <View style={styles.content}>          
+          <View style={styles.content}>            
             <FlatList 
               data={[...this.props.projects]}
               renderItem={({item}) => {
@@ -59,7 +59,7 @@ class HomeClient extends React.Component {
           </TouchableOpacity>
         </NavigationFooter>
       </View>
-    );
+    );    
   }
 }
 
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   btnEditProject: {
-    backgroundColor: '#00B5EE',
+    backgroundColor: '#ffc300',
     color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
@@ -133,16 +133,16 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = state  => {  
   const {listProjects} = state;
-  const keys = Object.keys(listProjects)
+  const keys = Object.keys(listProjects)  
   const listProjectsID = keys.map(key => {
     return { ...listProjects[key], id: key }    
   })
   return ({
     projects: listProjectsID,
     user: state.userLogin
-  })
+  })    
 }
 
 const mapDispatchToProps = {

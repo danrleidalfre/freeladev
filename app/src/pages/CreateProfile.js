@@ -1,37 +1,46 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, StyleSheet, TextInput, Alert} from 'react-native';
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 import { setField, saveProfile } from '../actions/createProfileActions';
 import { connect } from 'react-redux';
+import Content from '../components/Content';
+import firebase from 'firebase'
 
 class CreateProfile extends React.Component {
   constructor(props) {
     super(props);
   }
+  
+  DeleteProfile(user) {
+    firebase
+    .database()
+    .ref(`/freelancers/${user}`)
+    .remove()
+      firebase
+        .database()
+        .ref(`/users/${user}`)
+        .remove()
+          this.props.navigation.navigate('Login')
+  }
+  
   render() {
     const {createProfile, setField, saveProfile, user, navigation} = this.props;
     return(            
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
-          <View style={styles.content}>
+          <Content>
             <View style={styles.avatar}></View>
-            {/* <TextInput
-              style={styles.textInput}
-              placeholder="seu nome"
-              value={createProfile.nome}
-              onChangeText={value => setField('nome', value)}
-            />  */}
             <Text style={styles.name}>{user.user}</Text>
             <TextInput
               style={styles.textInput}
               placeholder="descrição"
               multiline={true}
-              numberOfLines={10}
+              numberOfLines={11}
               value={createProfile.descricao}
               onChangeText={value => setField('descricao', value)}
             />
-          </View>
+          </Content>
         </ScrollView>      
         <NavigationFooter>          
           <TouchableOpacity onPress={() => {
@@ -43,13 +52,10 @@ class CreateProfile extends React.Component {
             <Icon style={styles.iconNavigationFooter} name="checkbox" />
             <Text style={styles.btnNavigationFooter}>salvar perfil</Text>                        
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Projects')}>
-            <Icon style={styles.iconNavigationFooter} name="md-copy" />
-            <Text style={styles.btnNavigationFooter}>ver projetos</Text>                        
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-            <Icon style={styles.iconNavigationFooter} name="exit" />
-            <Text style={styles.btnNavigationFooter}>sair</Text>                        
+
+          <TouchableOpacity onPress={() => this.DeleteProfile(user.user)}>
+            <Icon style={styles.iconNavigationFooter} name="close" />
+            <Text style={styles.btnNavigationFooter}>apagar perfil</Text>                        
           </TouchableOpacity>
         </NavigationFooter>
       </View>

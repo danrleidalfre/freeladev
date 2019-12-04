@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { Alert } from 'react-native';
 
 export const SET_FIELD = 'SET_FIELD';
 
@@ -16,7 +17,6 @@ export const profileSavedSuccess = () => {
     type: PROFILE_SAVED_SUCCESS
   }
 }
-
 
 export const saveProfile = ({createProfile}) => {
   return async dispatch => {    

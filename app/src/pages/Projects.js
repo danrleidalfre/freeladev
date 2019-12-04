@@ -3,11 +3,11 @@ import {View, ScrollView, Text, TouchableOpacity, StyleSheet, FlatList} from 're
 import NavigationFooter from '../components/NavigationFooter';
 import Icon from 'react-native-ionicons'
 import { connect } from 'react-redux'
-import { watchProjects } from '../actions/projectsActions'
+import { watchAllProjects } from '../actions/projectsActions'
 
 class Projects extends React.Component {
   componentDidMount() {
-    this.props.watchProjects();
+    this.props.watchAllProjects();
   }
 
   render() {
@@ -131,4 +131,4 @@ const mapStateToProps = state => {
   return {projects: listProjectsID}
 }
 
-export default connect(mapStateToProps, { watchProjects })(Projects)
+export default connect(mapStateToProps, { watchAllProjects })(Projects)

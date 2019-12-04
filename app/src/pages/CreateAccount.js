@@ -35,7 +35,10 @@ export default class CreateAccount extends React.Component {
           firebase
             .database()
             .ref(`/freelancers/${user}`)
-            .set({nome:user})
+            .set({
+              nome: user,
+              descricao: 'fale sobre você!'
+            })
             .then() 
               Alert.alert('sucesso! utilize as credenciais criadas para acessar o sistema')
               this.props.navigation.navigate('Login')
@@ -82,6 +85,7 @@ export default class CreateAccount extends React.Component {
             textColor='rgba(255, 255, 255, 255)'
             tintColor='rgba(255, 255, 255, 255)'
             labelFontSize='20'
+            secureTextEntry
             value={this.state.password}
             onChangeText={valor => {this.onChangeHandler('password', valor)}}
           />
